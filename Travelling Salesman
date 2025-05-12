@@ -1,0 +1,15 @@
+from itertools import permutations
+
+def tsp(graph):
+    n = len(graph)
+    min_path = float('inf')
+    for perm in permutations(range(1, n)):
+        current_cost = graph[0][perm[0]]
+        for i in range(len(perm) - 1):
+            current_cost += graph[perm[i]][perm[i+1]]
+        current_cost += graph[perm[-1]][0]
+        min_path = min(min_path, current_cost)
+    return min_path
+
+graph = [[0, 10, 15, 20], [10, 0, 35, 25], [15, 35, 0, 30], [20, 25, 30, 0]]
+print(tsp(graph))
