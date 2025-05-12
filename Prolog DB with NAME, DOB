@@ -1,0 +1,4 @@
+person(john, date(1990, 5, 15)).
+person(sara, date(1985, 12, 3)).
+
+% Query: person(Name, DOB).
