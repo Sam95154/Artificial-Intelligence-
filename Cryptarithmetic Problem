@@ -1,0 +1,16 @@
+from itertools import permutations
+
+def solve_cryptarithmetic(puzzle):
+    words = puzzle.split()
+    unique_chars = set(''.join(words))
+    if len(unique_chars) > 10:
+        return None
+    for perm in permutations('0123456789', len(unique_chars)):
+        mapping = dict(zip(unique_chars, perm))
+        if all(mapping[word[0]] != '0' for word in words):
+            nums = [int(''.join(mapping[c] for c in word)) for word in words]
+            if sum(nums[:-1]) == nums[-1]:
+                return mapping
+    return None
+
+print(solve_cryptarithmetic("SEND + MORE = MONEY"))
