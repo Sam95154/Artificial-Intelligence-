@@ -1,0 +1,34 @@
+from collections import deque
+
+def is_valid(state):
+    ml, cl, mr, cr = state
+    return (ml >= cl or ml == 0) and (mr >= cr or mr == 0)
+
+def solve_missionaries_cannibals():
+    start = (3, 3, 0, 0)
+    goal = (0, 0, 3, 3)
+    queue = deque([(start, [])])
+    visited = set()
+
+    while queue:
+        state, path = queue.popleft()
+        if state == goal:
+            return path
+        if state in visited:
+            continue
+        visited.add(state)
+        ml, cl, mr, cr = state
+        
+        for dm, dc in [(1, 0), (2, 0), (0, 1), (0, 2), (1, 1)]:
+            for sign in [-1, 1]:
+                new_ml = ml + sign * dm
+                new_cl = cl + sign * dc
+                new_mr = mr - sign * dm
+                new_cr = cr - sign * dc
+                if 0 <= new_ml <= 3 and 0 <= new_cl <= 3 and 0 <= new_mr <= 3 and 0 <= new_cr <= 3:
+                    new_state = (new_ml, new_cl, new_mr, new_cr)
+                    if is_valid(new_state):
+                        queue.append((new_state, path + [new_state]))
+    return None
+
+print(solve_missionaries_cannibals())
