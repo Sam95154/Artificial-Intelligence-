@@ -1,0 +1,13 @@
+from collections import deque
+
+def bfs(graph, start):
+    visited, queue = set(), deque([start])
+    while queue:
+        node = queue.popleft()
+        if node not in visited:
+            print(node)
+            visited.add(node)
+            queue.extend(graph[node] - visited)
+
+graph = {'A': {'B', 'C'}, 'B': {'A', 'D'}, 'C': {'A'}, 'D': {'B'}}
+bfs(graph, 'A')
