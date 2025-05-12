@@ -1,0 +1,18 @@
+def map_coloring(adjacent, colors):
+    coloring = {}
+    def backtrack(region):
+        if region not in adjacent:
+            return True
+        for color in colors:
+            if all(coloring.get(neighbor) != color for neighbor in adjacent[region]):
+                coloring[region] = color
+                if backtrack(next(iter(adjacent.keys() - set(coloring.keys())))):
+                    return True
+                del coloring[region]
+        return False
+    backtrack(next(iter(adjacent.keys())))
+    return coloring
+
+adjacent = {'A': ['B', 'C'], 'B': ['A', 'C'], 'C': ['A', 'B']}
+colors = ['Red', 'Green', 'Blue']
+print(map_coloring(adjacent, colors))
