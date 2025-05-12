@@ -1,0 +1,3 @@
+knows(john, algebra).
+knows(john, programming).
+qualified(john) :- knows(john, algebra), knows(john, programming).
