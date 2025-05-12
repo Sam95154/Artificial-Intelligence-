@@ -1,0 +1,8 @@
+hanoi(1, Start, End, _) :-
+    write('Move disk from '), write(Start), write(' to '), write(End), nl.
+hanoi(N, Start, End, Aux) :-
+    N > 1,
+    M is N - 1,
+    hanoi(M, Start, Aux, End),
+    hanoi(1, Start, End, Aux),
+    hanoi(M, Aux, End, Start).
