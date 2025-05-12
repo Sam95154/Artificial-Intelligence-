@@ -1,0 +1,6 @@
+symptom(fever, flu).
+symptom(cough, flu).
+symptom(headache, migraine).
+
+diagnose(Symptom, Disease) :-
+    symptom(Symptom, Disease).
