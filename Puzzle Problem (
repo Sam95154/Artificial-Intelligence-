@@ -1,0 +1,28 @@
+from collections import deque
+
+def solve_8_puzzle(start, goal):
+    queue = deque([([start], [])])
+    visited = set()
+    moves = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+
+    while queue:
+        path, actions = queue.popleft()
+        current = path[-1]
+        if current == goal:
+            return actions
+        if tuple(map(tuple, current)) in visited:
+            continue
+        visited.add(tuple(map(tuple, current)))
+        empty = [(i, j) for i in range(3) for j in range(3) if current[i][j] == 0)][0]
+        
+        for di, dj in moves:
+            ni, nj = empty[0] + di, empty[1] + dj
+            if 0 <= ni < 3 and 0 <= nj < 3:
+                new_state = [row[:] for row in current]
+                new_state[empty[0]][empty[1]] = new_state[ni][nj]
+                new_state[ni][nj] = 0
+                queue.append((path + [new_state], actions + [(ni, nj)]))
+
+start = [[1, 2, 3], [4, 0, 5], [6, 7, 8]]
+goal = [[1, 2, 3], [4, 5, 6], [7, 8, 0]]
+print(solve_8_puzzle(start, goal))
