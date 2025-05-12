@@ -1,0 +1,32 @@
+def alphabeta(board, depth, alpha, beta, is_maximizing):
+    scores = {'X': 1, 'O': -1, 'tie': 0}
+    winner = check_winner(board)  # Same as in Minimax
+    if winner is not None:
+        return scores[winner]
+
+    if is_maximizing:
+        best_score = -float('inf')
+        for i in range(3):
+            for j in range(3):
+                if board[i][j] == '':
+                    board[i][j] = 'X'
+                    score = alphabeta(board, depth + 1, alpha, beta, False)
+                    board[i][j] = ''
+                    best_score = max(score, best_score)
+                    alpha = max(alpha, best_score)
+                    if beta <= alpha:
+                        break
+        return best_score
+    else:
+        best_score = float('inf')
+        for i in range(3):
+            for j in range(3):
+                if board[i][j] == '':
+                    board[i][j] = 'O'
+                    score = alphabeta(board, depth + 1, alpha, beta, True)
+                    board[i][j] = ''
+                    best_score = min(score, best_score)
+                    beta = min(beta, best_score)
+                    if beta <= alpha:
+                        break
+        return best_score
