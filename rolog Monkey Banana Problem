@@ -1,0 +1,5 @@
+state(monkey, box, banana, has_not).
+
+can_reach(State) :-
+    State = state(monkey, box, banana, has_not),
+    write('Monkey gets the banana!').
