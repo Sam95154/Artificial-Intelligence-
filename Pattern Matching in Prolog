@@ -1,0 +1,8 @@
+pattern([a, b, c, d], [b, c]). % sample pattern
+
+match(Pattern, List) :-
+    append(_, rest, List),
+    append(Pattern, _, rest).
+
+% Query:
+% ?- match([b, c], [a, b, c, d]).
