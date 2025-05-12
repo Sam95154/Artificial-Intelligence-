@@ -1,0 +1,28 @@
+from collections import deque
+
+def water_jug_bfs(cap_a, cap_b, target):
+    visited = set()
+    queue = deque([(0, 0, [])])
+    
+    while queue:
+        a, b, path = queue.popleft()
+        if a == target or b == target:
+            return path + [(a, b)]
+        if (a, b) in visited:
+            continue
+        visited.add((a, b))
+        
+        states = [
+            (cap_a, b, path + [(a, b)]),  # Fill A
+            (a, cap_b, path + [(a, b)]),   # Fill B
+            (0, b, path + [(a, b)]),       # Empty A
+            (a, 0, path + [(a, b)]),      # Empty B
+            (a - min(a, cap_b - b), b + min(a, cap_b - b), path + [(a, b)]),  # A to B
+            (a + min(b, cap_a - a), b - min(b, cap_a - a), path + [(a, b)])   # B to A
+        ]
+        for state in states:
+            if state[:2] not in visited:
+                queue.append(state)
+    return None
+
+print(water_jug_bfs(4, 3, 2))
