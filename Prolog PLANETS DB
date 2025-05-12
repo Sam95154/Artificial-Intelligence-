@@ -1,0 +1,6 @@
+planet(mercury, rocky, 0.39).
+planet(venus, rocky, 0.72).
+planet(earth, rocky, 1.0).
+planet(mars, rocky, 1.52).
+
+% Query: planet(Name, Type, DistanceFromSun).
