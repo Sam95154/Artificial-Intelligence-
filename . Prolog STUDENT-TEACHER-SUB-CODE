@@ -1,0 +1,4 @@
+student_teacher_sub(alice, dr_smith, math, cs101).
+student_teacher_sub(bob, dr_jones, physics, ph202).
+
+% Query: student_teacher_sub(Student, Teacher, Subject, Code).
