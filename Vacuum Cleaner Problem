@@ -1,0 +1,10 @@
+def vacuum_cleaner(environment):
+    location, status = environment
+    if status == 'Dirty':
+        return 'Suck'
+    elif location == 'A':
+        return 'Right'
+    else:
+        return 'Left'
+
+print(vacuum_cleaner(('A', 'Dirty')))
