@@ -1,0 +1,9 @@
+fact(a).
+fact(b).
+
+rule(c) :- fact(a), fact(b).
+
+start_forward_chaining :-
+    rule(c),
+    assert(fact(c)),
+    write('Derived fact: c').
